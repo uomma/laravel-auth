@@ -50,7 +50,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+       /*  $posts = Post::where('slug', $slug)->get(); */
+     
+        return view('admin.posts.show', compact('post'));                                                         
     }
 
     /**

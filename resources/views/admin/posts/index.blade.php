@@ -20,7 +20,7 @@
                             <td>{{ $post->slug }}</td>
                             <td>
                                 <ul class="list-untyled">
-                                    <li><a href="" class="btn btn-sm ">show</a></li>
+                                    <li><a href="{{route('admin.posts.show', $post->slug)}}" class="btn btn-sm ">show</a></li>
                                 </ul>
                             </td>
                         </tr>
