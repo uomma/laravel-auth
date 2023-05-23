@@ -13,18 +13,19 @@ class StorePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array <string, mixed>
      */
     public function rules()
     {
         return [
-            //
+            'title' => 'required|string|max:150',
+            'content' => 'string|nullable'
         ];
     }
 }

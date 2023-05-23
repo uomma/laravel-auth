@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -28,7 +29,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -39,7 +40,13 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $data = $request-> validated();
+        $post = new Post();
+        $post->fill($data);
+        $post->slug=Str::slug($data['title']);
+        $post->save();
+
+        return redirect()->route('admin.posts.index')->with('message', 'bravo hai creato un nuovo post'); 
     }
 
     /**
@@ -63,7 +70,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+       return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -75,17 +82,30 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+
+
+        $data = $request->validated();
+        $post->update($data);
+        $post->slug=Str::slug($data['title']);
+        $post->save();
+
+        return redirect()->route('admin.posts.index')->with('message','bravo hai modificato un  post'); 
+
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage.  
      *
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
-    {
-        //
+    { 
+        
+      $old_id = $post->id;
+      $post->delete();
+      
+      return redirect()->route('admin.posts.index')->with('message',"bravo hai eliminato $old_id"); 
+
     }
 }
