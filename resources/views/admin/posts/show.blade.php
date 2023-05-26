@@ -3,12 +3,23 @@
 @section('content')
     <div class="container-fluid mt-4">
         <div class="row justify-content-start">
+
             <div>
 
-                {{ $post->title }}
-            </div>
-            <div> 
-                {{ $post->caption }}
+                <div>
+                    @if ($post->cover_img)
+                        <img src="{{asset("storage/$post->cover_img")}}" alt="{{ $post->title }}">
+                                                
+                    @endif
+                </div>
+                <div>
+                    {{ $post->title }}
+
+                </div>
+                <div>
+                    {{ $post->caption }}
+
+                </div>
             </div>
 
         </div>

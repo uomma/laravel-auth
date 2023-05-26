@@ -17,7 +17,7 @@
             @endif
 
             <!-- Create Post Form -->
-            <form action="{{ route('admin.posts.store') }}" method="POST">
+            <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">title</label>
@@ -27,7 +27,10 @@
                     <label for="content" class="form-label">content</label>
                     <textarea class="form-control" id="exampleInputPassword1" name="content"></textarea>
                 </div>
-
+                <div class="mb-3">
+                    <label for="cover_img" class="form-label">cover_img</label>
+                    <input class="form-control" type="file" id="cover_img" name="cover_img">
+                  </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
